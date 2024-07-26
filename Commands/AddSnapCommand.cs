@@ -7,7 +7,7 @@ namespace Snapp.Cli.Commands;
 
 public class AddSnappsCommand : Command<AddSnappsCommand.Settings> {
   public sealed class Settings : DefaultCommandSettings {
-    public Settings(IOptions<AppSettings> settings) : base(settings) { }
+    public Settings(AppSettings settings) : base(settings) { }
   }
 
   public override int Execute(CommandContext context, Settings settings) {
@@ -23,8 +23,9 @@ public class AddSnappsCommand : Command<AddSnappsCommand.Settings> {
           .PromptStyle("green"));
     }
 
-    Console.WriteLine(
-      $"Executing list snapps command with server address: {settings.ServerUrl} and API key: {settings.ApiKey}");
+    
+    Log.Debug(
+      $"Executing add snapps command with server address: {settings.ServerUrl} and API key: {settings.ApiKey}");
     // var snaps = await service.GetSnaps();
     // foreach (var snap in snaps.Results) {
     //   Console.WriteLine($"{snap.Id}: {snap.Title}");

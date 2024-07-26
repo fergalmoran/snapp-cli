@@ -3,15 +3,21 @@ using Microsoft.Extensions.Configuration;
 namespace Snapp.Cli.Helpers;
 
 public class AppSettings {
-  public string? ApiKey { get; set; }
-  public string? ServerUrl { get; set; }
+  public IConfiguration Config { get; set; }
+
+  public AppSettings() {
+    Config = AppSettingsHelper.InitialiseSettings();
+  }
+
+  public string? ServerUrl { get => Config.GetSection("ServerUrl").Value; }
+  public string? ApiKey { get => Config.GetSection("ApiKey").Value; }
 }
 
 public class AppSettingsHelper {
-  private readonly AppSettings _config;
-
-  public string? ApiKey { get => _config.ApiKey; }
-  public string? ServerUrl { get => _config.ServerUrl; }
+  // private readonly AppSettings _config;
+  //
+  // public string? ApiKey { get => _config?.ApiKey; }
+  // public string? ServerUrl { get => _config?.ServerUrl; }
 
   private static string SettingsFile {
     get => Path.Combine(
@@ -19,11 +25,7 @@ public class AppSettingsHelper {
       "snapp-cli/config.json");
   }
 
-  public AppSettingsHelper() {
-    _config = _initialiseSettings();
-  }
-
-  private AppSettings _initialiseSettings() {
+  public static IConfiguration InitialiseSettings() {
     var config = new ConfigurationBuilder()
       .SetBasePath(AppContext.BaseDirectory)
       .AddJsonFile(SettingsFile, false, true)
@@ -33,11 +35,6 @@ public class AppSettingsHelper {
       throw new NullReferenceException("Missing settings file");
     }
 
-    var c = config.Get<AppSettings>();
-    if (c is null) {
-      throw new NullReferenceException("Missing settings");
-    }
-
-    return c;
+    return config;
   }
 }

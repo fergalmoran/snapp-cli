@@ -9,8 +9,8 @@ namespace Snapp.Cli.Commands;
 public class DefaultCommandSettings : CommandSettings {
   public readonly AppSettings Config;
 
-  public DefaultCommandSettings(IOptions<AppSettings> settings) {
-    Config = settings.Value;
+  protected DefaultCommandSettings(AppSettings settings) {
+    Config = settings;
   }
 
   [Description("Path to search. Defaults to current directory.")]

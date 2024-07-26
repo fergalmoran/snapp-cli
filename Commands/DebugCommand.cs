@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Snapp.Cli.Helpers;
 using Spectre.Console.Cli;
 
 namespace Snapp.Cli.Commands;
@@ -11,7 +12,7 @@ public class DebugCommand : AsyncCommand<DebugCommand.Settings> {
   }
 
   public override async Task<int> ExecuteAsync(CommandContext context, Settings settings) {
-    Console.WriteLine($"Echoing: {settings.EchoText}");
+    Log.Debug($"Echoing: {settings.EchoText}");
     return await Task.FromResult(3);
   }
 }
