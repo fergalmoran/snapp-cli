@@ -1,0 +1,14 @@
+{
+  "Servers": [
+    {
+      "Default": {
+        "ApiKey": "<YOUR_API_KEY>",
+        "ServerUrl": "<YOUR_SNAPP_SERVER_URL>"
+      },
+      "Other": {
+        "ApiKey": "<YOUR_OTHER_API_KEY>",
+        "ServerUrl": "<YOUR_OTHER_SNAPP_SERVER_URL>"
+      }
+    }
+  ]
+}
